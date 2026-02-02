@@ -196,21 +196,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add counter animation for stats
-const animateCounter = (element, target) => {
-    let current = 0;
-    const increment = target / 100;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 20);
-};
-
 // Trigger counter animations when stats are visible
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
