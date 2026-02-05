@@ -71,58 +71,168 @@ document.querySelectorAll('.card, .danger-item, .fact-card, .help-card').forEach
 // Quiz functionality
 let currentQuestion = 0;
 let correctAnswers = 0;
-const totalQuestions = 3;
+let selectedQuestions = [];
+const questionsToShow = 5;
 
-const questions = document.querySelectorAll('.question');
-const quizResult = document.getElementById('quiz-result');
-const progressFill = document.querySelector('.progress-fill');
-const currentQuestionSpan = document.getElementById('current-question');
+// All quiz questions pool
+const allQuizQuestions = [
+    {
+        question: "Ile minut życia średnio skraca jeden papieros?",
+        options: ["3 minuty", "11 minut", "20 minut"],
+        correctIndex: 1
+    },
+    {
+        question: "Ile osób na świecie umiera rocznie z powodu palenia?",
+        options: ["1 milion", "8 milionów", "15 milionów"],
+        correctIndex: 1
+    },
+    {
+        question: "Jaki procent uzależnionych rozpoczął palenie przed 18 rokiem życia?",
+        options: ["50%", "70%", "90%"],
+        correctIndex: 2
+    },
+    {
+        question: "Ile substancji chemicznych zawiera papieros?",
+        options: ["Około 200", "Około 1000", "Ponad 7000"],
+        correctIndex: 2
+    },
+    {
+        question: "Po jakim czasie od rzucenia palenia ryzyko chorób serca spada o 50%?",
+        options: ["1 miesiąc", "6 miesięcy", "1 rok"],
+        correctIndex: 2
+    },
+    {
+        question: "Ile zgonów rocznie na świecie spowodowanych jest alkoholem?",
+        options: ["500 tysięcy", "3 miliony", "10 milionów"],
+        correctIndex: 1
+    },
+    {
+        question: "O ile procent gorsze wyniki w nauce ma młodzież pijąca alkohol?",
+        options: ["20%", "40%", "60%"],
+        correctIndex: 1
+    },
+    {
+        question: "Ile może kosztować palacz rocznie na papierosy?",
+        options: ["5,000 zł", "15,000 zł", "25,000 zł"],
+        correctIndex: 1
+    },
+    {
+        question: "Po jakim czasie od ostatniego papierosa wraca zmysł smaku i węchu?",
+        options: ["12 godzin", "48 godzin", "1 tydzień"],
+        correctIndex: 1
+    },
+    {
+        question: "Ile razy większe jest ryzyko uzależnienia od alkoholu gdy zaczyna się pić przed 15 rokiem życia?",
+        options: ["2 razy", "4 razy", "6 razy"],
+        correctIndex: 1
+    },
+    {
+        question: "Jaka jest maksymalna kara więzienia za posiadanie narkotyków w Polsce?",
+        options: ["1 rok", "3 lata", "5 lat"],
+        correctIndex: 1
+    },
+    {
+        question: "Ile procent przestępstw młodzieży jest popełnianych pod wpływem alkoholu?",
+        options: ["30%", "50%", "70%"],
+        correctIndex: 1
+    }
+];
 
-// Handle quiz option clicks
-document.querySelectorAll('.quiz-option').forEach(option => {
-    option.addEventListener('click', function() {
-        // Disable all options in current question
-        const currentOptions = this.parentElement.querySelectorAll('.quiz-option');
-        currentOptions.forEach(opt => {
-            opt.style.pointerEvents = 'none';
-        });
+// Function to select random questions
+function selectRandomQuestions() {
+    const shuffled = [...allQuizQuestions].sort(() => Math.random() - 0.5);
+    selectedQuestions = shuffled.slice(0, questionsToShow);
+}
 
-        // Check if answer is correct
-        const isCorrect = this.dataset.answer === 'correct';
+// Function to render quiz questions
+function renderQuiz() {
+    const quizArea = document.getElementById('quiz-area');
+    quizArea.innerHTML = '';
+    
+    selectedQuestions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = index === 0 ? 'question active' : 'question';
+        questionDiv.dataset.question = index + 1;
         
-        if (isCorrect) {
-            this.classList.add('correct');
-            correctAnswers++;
-        } else {
-            this.classList.add('wrong');
-            // Show the correct answer
-            currentOptions.forEach(opt => {
-                if (opt.dataset.answer === 'correct') {
-                    opt.classList.add('correct');
-                }
-            });
-        }
-
-        // Move to next question after delay
-        setTimeout(() => {
-            currentQuestion++;
-            
-            if (currentQuestion < totalQuestions) {
-                // Show next question
-                questions.forEach(q => q.classList.remove('active'));
-                questions[currentQuestion].classList.add('active');
-                
-                // Update progress
-                const progress = ((currentQuestion + 1) / totalQuestions) * 100;
-                progressFill.style.width = progress + '%';
-                currentQuestionSpan.textContent = currentQuestion + 1;
-            } else {
-                // Show results
-                showResults();
-            }
-        }, 1500);
+        const questionTitle = document.createElement('h3');
+        questionTitle.textContent = `Pytanie ${index + 1}: ${q.question}`;
+        
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'quiz-options';
+        
+        q.options.forEach((option, optIndex) => {
+            const button = document.createElement('button');
+            button.className = 'quiz-option';
+            button.dataset.answer = optIndex === q.correctIndex ? 'correct' : 'wrong';
+            button.textContent = option;
+            optionsDiv.appendChild(button);
+        });
+        
+        questionDiv.appendChild(questionTitle);
+        questionDiv.appendChild(optionsDiv);
+        quizArea.appendChild(questionDiv);
     });
-});
+    
+    // Attach event listeners to new buttons
+    attachQuizListeners();
+}
+
+// Function to attach quiz event listeners
+function attachQuizListeners() {
+    document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function() {
+            // Disable all options in current question
+            const currentOptions = this.parentElement.querySelectorAll('.quiz-option');
+            currentOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            // Check if answer is correct
+            const isCorrect = this.dataset.answer === 'correct';
+            
+            if (isCorrect) {
+                this.classList.add('correct');
+                correctAnswers++;
+            } else {
+                this.classList.add('wrong');
+                // Show the correct answer
+                currentOptions.forEach(opt => {
+                    if (opt.dataset.answer === 'correct') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestion++;
+                
+                if (currentQuestion < questionsToShow) {
+                    // Show next question
+                    const questions = document.querySelectorAll('.question');
+                    questions.forEach(q => q.classList.remove('active'));
+                    questions[currentQuestion].classList.add('active');
+                    
+                    // Update progress
+                    const progressFill = document.querySelector('.progress-fill');
+                    const currentQuestionSpan = document.getElementById('current-question');
+                    const progress = ((currentQuestion + 1) / questionsToShow) * 100;
+                    progressFill.style.width = progress + '%';
+                    currentQuestionSpan.textContent = currentQuestion + 1;
+                } else {
+                    // Show results
+                    showResults();
+                }
+            }, 1500);
+        });
+    });
+}
+
+// Initialize quiz on page load
+if (document.getElementById('quiz-area')) {
+    selectRandomQuestions();
+    renderQuiz();
+}
 
 function showResults() {
     // Hide questions
@@ -130,13 +240,14 @@ function showResults() {
     document.querySelector('.quiz-progress').style.display = 'none';
     
     // Show results
+    const quizResult = document.getElementById('quiz-result');
     quizResult.classList.add('show');
     
-    const score = (correctAnswers / totalQuestions) * 100;
+    const score = (correctAnswers / questionsToShow) * 100;
     const resultScore = document.querySelector('.result-score');
     const resultMessage = document.querySelector('.result-message');
     
-    resultScore.textContent = correctAnswers + ' / ' + totalQuestions;
+    resultScore.textContent = correctAnswers + ' / ' + questionsToShow;
     
     if (score === 100) {
         resultMessage.textContent = '🎉 Perfekcyjnie! Jesteś ekspertem od zdrowego życia!';
@@ -154,21 +265,18 @@ document.querySelector('.reset-quiz').addEventListener('click', function() {
     currentQuestion = 0;
     correctAnswers = 0;
     
-    // Reset all options
-    document.querySelectorAll('.quiz-option').forEach(option => {
-        option.classList.remove('correct', 'wrong');
-        option.style.pointerEvents = 'auto';
-    });
-    
-    // Show first question
-    questions.forEach(q => q.classList.remove('active'));
-    questions[0].classList.add('active');
+    // Select new random questions
+    selectRandomQuestions();
+    renderQuiz();
     
     // Reset progress
-    progressFill.style.width = '33.33%';
+    const progressFill = document.querySelector('.progress-fill');
+    const currentQuestionSpan = document.getElementById('current-question');
+    progressFill.style.width = (100 / questionsToShow) + '%';
     currentQuestionSpan.textContent = '1';
     
     // Hide results, show quiz
+    const quizResult = document.getElementById('quiz-result');
     quizResult.classList.remove('show');
     document.getElementById('quiz-area').style.display = 'block';
     document.querySelector('.quiz-progress').style.display = 'block';
