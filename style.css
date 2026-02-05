@@ -501,7 +501,7 @@ section {
     height: 100%;
     background: var(--gradient-1);
     transition: width 0.3s ease;
-    width: 33.33%;
+    width: 20%;
 }
 
 .progress-text {
