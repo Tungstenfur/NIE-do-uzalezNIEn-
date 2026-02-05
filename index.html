@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NIE do uzależNIEń! - Zdrowe życie bez używek</title>
+    <title>NIE do uzależNIEń! - Zdrowe życie bez używek | Edukacja o zagrożeniach</title>
+    <meta name="description" content="Kompleksowy przewodnik dla młodzieży o zagrożeniach związanych z używkami. Poznaj fakty o papierosach, alkoholu i narkotykach poparte danymi WHO i UNODC.">
+    <meta name="keywords" content="używki, papierosy, alkohol, narkotyki, młodzież, edukacja, profilaktyka, zdrowie">
+    <meta name="author" content="NIE do uzależNIEń! - Projekt edukacyjny">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tungstenfur.github.io/NIE-do-uzalezNIEn-/">
+    <meta property="og:title" content="NIE do uzależNIEń! - Zdrowe życie bez używek">
+    <meta property="og:description" content="Kompleksowy przewodnik dla młodzieży o zagrożeniach związanych z używkami. Poznaj fakty o papierosach, alkoholu i narkotykach poparte danymi WHO i UNODC.">
+    <meta property="og:image" content="https://tungstenfur.github.io/NIE-do-uzalezNIEn-/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tungstenfur.github.io/NIE-do-uzalezNIEn-/">
+    <meta property="twitter:title" content="NIE do uzależNIEń! - Zdrowe życie bez używek">
+    <meta property="twitter:description" content="Kompleksowy przewodnik dla młodzieży o zagrożeniach związanych z używkami. Poznaj fakty o papierosach, alkoholu i narkotykach poparte danymi WHO i UNODC.">
+    <meta property="twitter:image" content="https://tungstenfur.github.io/NIE-do-uzalezNIEn-/og-image.png">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,20 +29,21 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Menu główne">
         <div class="container">
             <div class="logo">
                 <h1>NIE do uzależNIEń! 🚭🚫🍺</h1>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Start</a></li>
-                <li><a href="papierosy.html" class="nav-link">Papierosy</a></li>
-                <li><a href="alkohol.html" class="nav-link">Alkohol</a></li>
-                <li><a href="narkotyki.html" class="nav-link">Narkotyki</a></li>
-                <li><a href="#quiz" class="nav-link">Quiz</a></li>
-                <li><a href="#help" class="nav-link">Pomoc</a></li>
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#home" class="nav-link" role="menuitem">Start</a></li>
+                <li role="none"><a href="papierosy.html" class="nav-link" role="menuitem">Papierosy</a></li>
+                <li role="none"><a href="alkohol.html" class="nav-link" role="menuitem">Alkohol</a></li>
+                <li role="none"><a href="narkotyki.html" class="nav-link" role="menuitem">Narkotyki</a></li>
+                <li role="none"><a href="#quiz" class="nav-link" role="menuitem">Quiz</a></li>
+                <li role="none"><a href="#help" class="nav-link" role="menuitem">Pomoc</a></li>
+                <li role="none"><a href="#sources" class="nav-link" role="menuitem">Źródła</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" role="button" aria-label="Menu mobilne" aria-expanded="false" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -97,10 +116,12 @@
                     <div class="stat">
                         <div class="stat-number">8 mln</div>
                         <div class="stat-label">zgonów rocznie na świecie</div>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/tobacco" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: WHO - Światowa Organizacja Zdrowia">Źródło: WHO</a>
                     </div>
                     <div class="stat">
                         <div class="stat-number">11 min</div>
                         <div class="stat-label">utraty życia na papierosa</div>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/tobacco" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: WHO - Światowa Organizacja Zdrowia">Źródło: WHO</a>
                     </div>
                 </div>
             </div>
@@ -123,10 +144,12 @@
                     <div class="stat">
                         <div class="stat-number">3 mln</div>
                         <div class="stat-label">zgonów rocznie na świecie</div>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: WHO - Światowa Organizacja Zdrowia">Źródło: WHO</a>
                     </div>
                     <div class="stat">
                         <div class="stat-number">5-10 lat</div>
                         <div class="stat-label">krótsze życie alkoholika</div>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: WHO - Światowa Organizacja Zdrowia">Źródło: WHO</a>
                     </div>
                 </div>
             </div>
@@ -148,10 +171,12 @@
                     <div class="stat">
                         <div class="stat-number">500 tys.</div>
                         <div class="stat-label">zgonów rocznie na świecie</div>
+                        <a href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2023.html" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: UNODC - Światowy Raport o Narkotykach">Źródło: UNODC</a>
                     </div>
                     <div class="stat">
                         <div class="stat-number">1 raz</div>
                         <div class="stat-label">wystarczy do uzależnienia</div>
+                        <a href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2023.html" target="_blank" rel="noopener noreferrer" class="stat-source" aria-label="Źródło: UNODC - Światowy Raport o Narkotykach">Źródło: UNODC</a>
                     </div>
                 </div>
             </div>
@@ -197,11 +222,56 @@
         </div>
     </section>
 
+    <!-- Cost Calculator Section -->
+    <section id="calculator" class="calculator">
+        <div class="container">
+            <h2 class="section-title">💰 Kalkulator kosztów palenia</h2>
+            <p class="section-description">
+                Zobacz ile możesz zaoszczędzić rezygnując z papierosów!
+            </p>
+            <div class="calculator-container">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="cigarettes-per-day">Ile papierosów dziennie?</label>
+                        <input type="number" id="cigarettes-per-day" min="0" max="60" value="10" aria-label="Liczba papierosów dziennie">
+                    </div>
+                    <div class="input-group">
+                        <label for="pack-price">Cena paczki (zł):</label>
+                        <input type="number" id="pack-price" min="0" max="50" value="20" step="0.5" aria-label="Cena paczki papierosów w złotych">
+                    </div>
+                    <button id="calculate-btn" class="cta-button">Oblicz oszczędności</button>
+                </div>
+                <div class="calculator-results" id="calculator-results">
+                    <h3>Twoje możliwe oszczędności:</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-label">Za tydzień:</div>
+                            <div class="result-value" id="result-week">0 zł</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Za miesiąc:</div>
+                            <div class="result-value" id="result-month">0 zł</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Za rok:</div>
+                            <div class="result-value" id="result-year">0 zł</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Za 5 lat:</div>
+                            <div class="result-value" id="result-5years">0 zł</div>
+                        </div>
+                    </div>
+                    <p class="result-message">💡 Za te pieniądze możesz kupić: nowy laptop, wyjazd wakacyjny lub zaoszczędzić na przyszłość!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Quiz Section -->
     <section id="quiz" class="quiz">
         <div class="container">
             <h2 class="section-title">Sprawdź swoją wiedzę!</h2>
-            <div class="quiz-container">
+            <div class="quiz-container" role="region" aria-label="Quiz edukacyjny">
                 <div id="quiz-area">
                     <!-- Questions will be dynamically generated by JavaScript -->
                 </div>
@@ -209,10 +279,18 @@
                     <h3>Twój wynik:</h3>
                     <div class="result-score"></div>
                     <p class="result-message"></p>
-                    <button class="reset-quiz">Spróbuj ponownie</button>
+                    <div class="result-resources">
+                        <h4>Dowiedz się więcej:</h4>
+                        <div class="resource-links">
+                            <a href="#dangers" class="resource-link">📖 Zagrożenia związane z używkami</a>
+                            <a href="#help" class="resource-link">🆘 Gdzie szukać pomocy</a>
+                            <a href="#sources" class="resource-link">📚 Sprawdź źródła</a>
+                        </div>
+                    </div>
+                    <button class="reset-quiz" aria-label="Rozpocznij quiz od nowa">Spróbuj ponownie</button>
                 </div>
                 <div class="quiz-progress">
-                    <div class="progress-bar">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-fill"></div>
                     </div>
                     <p class="progress-text">Pytanie <span id="current-question">1</span> z 5</p>
@@ -226,30 +304,107 @@
         <div class="container">
             <h2 class="section-title">Potrzebujesz pomocy?</h2>
             <p class="section-description">Nie jesteś sam! Oto miejsca, gdzie możesz uzyskać wsparcie:</p>
+            
+            <h3 style="text-align: center; margin: 2rem 0 1rem; color: var(--primary-color);">🇵🇱 Pomoc w Polsce</h3>
             <div class="help-grid">
                 <div class="help-card">
-                    <h3>📞 Telefon Zaufania</h3>
-                    <p class="help-number">116 111</p>
-                    <p>Telefon dla dzieci i młodzieży (czynny całą dobę)</p>
+                    <h3>📞 Telefon Zaufania dla Dzieci i Młodzieży</h3>
+                    <p class="help-number"><a href="tel:116111" aria-label="Zadzwoń na telefon zaufania 116 111">116 111</a></p>
+                    <p>Czynny całą dobę, 7 dni w tygodniu. Bezpłatne wsparcie psychologiczne dla dzieci i młodzieży.</p>
                 </div>
                 <div class="help-card">
-                    <h3>🏥 Poradnie Uzależnień</h3>
-                    <p class="help-number">800 199 990</p>
-                    <p>Bezpłatna pomoc w problemach z używkami</p>
+                    <h3>🏥 Krajowe Centrum Przeciwdziałania Uzależnieniom</h3>
+                    <p class="help-number"><a href="tel:800199990" aria-label="Zadzwoń na infolinię 800 199 990">800 199 990</a></p>
+                    <p>Bezpłatna infolinia, pon-pt 8:00-20:00. Pomoc w problemach z używkami.</p>
                 </div>
                 <div class="help-card">
                     <h3>💬 Anonimowi Alkoholicy</h3>
-                    <p class="help-number">801 033 242</p>
-                    <p>Wsparcie dla osób z problemem alkoholowym</p>
+                    <p class="help-number"><a href="tel:801033242" aria-label="Zadzwoń do Anonimowych Alkoholików 801 033 242">801 033 242</a></p>
+                    <p>Wsparcie dla osób z problemem alkoholowym i ich bliskich. Dostępne spotkania w całej Polsce.</p>
                 </div>
                 <div class="help-card">
-                    <h3>🆘 Telefon dla Narkomanów</h3>
-                    <p class="help-number">116 123</p>
-                    <p>Pomoc w kryzysie dla osób uzależnionych</p>
+                    <h3>🆘 Narkonon - Telefon Zaufania</h3>
+                    <p class="help-number"><a href="tel:800070800" aria-label="Zadzwoń na telefon zaufania Narkonon 800 070 800">800 070 800</a></p>
+                    <p>Bezpłatna pomoc dla osób uzależnionych od narkotyków i ich rodzin.</p>
                 </div>
             </div>
+            
+            <h3 style="text-align: center; margin: 3rem 0 1rem; color: var(--primary-color);">🌍 Pomoc międzynarodowa</h3>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>🌐 WHO - Światowa Organizacja Zdrowia</h3>
+                    <p><a href="https://www.who.int/health-topics/substance-abuse" target="_blank" rel="noopener noreferrer" class="help-link">Zasoby edukacyjne WHO</a></p>
+                </div>
+                <div class="help-card">
+                    <h3>🌐 UNODC - Narkozy i Przestępczość</h3>
+                    <p><a href="https://www.unodc.org/unodc/en/prevention/index.html" target="_blank" rel="noopener noreferrer" class="help-link">Programy prewencyjne UNODC</a></p>
+                </div>
+            </div>
+            
             <div class="help-reminder">
                 <p>Pamiętaj: Nigdy nie jest za późno, aby poprosić o pomoc. Każdy zasługuje na drugie szanse!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sources Section -->
+    <section id="sources" class="sources">
+        <div class="container">
+            <h2 class="section-title">Źródła i bibliografia</h2>
+            <p class="section-description">
+                Wszystkie informacje na tej stronie pochodzą z wiarygodnych źródeł naukowych i organizacji międzynarodowych:
+            </p>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <h3>📚 WHO - Światowa Organizacja Zdrowia</h3>
+                    <ul class="source-list">
+                        <li><a href="https://www.who.int/news-room/fact-sheets/detail/tobacco" target="_blank" rel="noopener noreferrer">WHO Fact Sheet: Tobacco (tytoń)</a></li>
+                        <li><a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener noreferrer">WHO Fact Sheet: Alcohol (alkohol)</a></li>
+                        <li><a href="https://www.who.int/health-topics/substance-abuse" target="_blank" rel="noopener noreferrer">WHO: Substance Abuse (używki)</a></li>
+                    </ul>
+                </div>
+                <div class="source-card">
+                    <h3>📊 UNODC - Biuro ONZ ds. Narkotyków i Przestępczości</h3>
+                    <ul class="source-list">
+                        <li><a href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2023.html" target="_blank" rel="noopener noreferrer">World Drug Report 2023</a></li>
+                        <li><a href="https://www.unodc.org/unodc/en/prevention/index.html" target="_blank" rel="noopener noreferrer">UNODC Prevention Programs</a></li>
+                    </ul>
+                </div>
+                <div class="source-card">
+                    <h3>🇵🇱 Polskie źródła</h3>
+                    <ul class="source-list">
+                        <li><a href="https://www.gov.pl/web/zdrowie/krajowe-centrum-przeciwdzialania-uzaleznieniom" target="_blank" rel="noopener noreferrer">Krajowe Centrum Przeciwdziałania Uzależnieniom</a></li>
+                        <li><a href="https://www.parpa.pl/" target="_blank" rel="noopener noreferrer">Państwowa Agencja Rozwiązywania Problemów Alkoholowych</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Section -->
+    <section id="share" class="share-section">
+        <div class="container">
+            <h2 class="section-title">Udostępnij wiedzę!</h2>
+            <p class="section-description">
+                Pomóż innym podjąć świadome decyzje - udostępnij tę stronę
+            </p>
+            <div class="share-buttons">
+                <button class="share-btn facebook" onclick="shareOnFacebook()" aria-label="Udostępnij na Facebooku">
+                    <span class="share-icon">📘</span>
+                    <span>Facebook</span>
+                </button>
+                <button class="share-btn twitter" onclick="shareOnTwitter()" aria-label="Udostępnij na Twitterze">
+                    <span class="share-icon">🐦</span>
+                    <span>Twitter</span>
+                </button>
+                <button class="share-btn whatsapp" onclick="shareOnWhatsApp()" aria-label="Udostępnij przez WhatsApp">
+                    <span class="share-icon">💬</span>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="share-btn copy" onclick="copyLink()" aria-label="Skopiuj link">
+                    <span class="share-icon">🔗</span>
+                    <span>Kopiuj link</span>
+                </button>
             </div>
         </div>
     </section>

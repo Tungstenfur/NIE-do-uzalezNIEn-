@@ -4,7 +4,9 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
 hamburger.addEventListener('click', () => {
+    const isExpanded = navMenu.classList.contains('active');
     navMenu.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', !isExpanded);
     
     // Animate hamburger
     const spans = hamburger.querySelectorAll('span');
@@ -16,6 +18,14 @@ hamburger.addEventListener('click', () => {
         spans[0].style.transform = 'none';
         spans[1].style.opacity = '1';
         spans[2].style.transform = 'none';
+    }
+});
+
+// Keyboard support for hamburger menu
+hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
     }
 });
 
@@ -179,53 +189,71 @@ function renderQuiz() {
 
 // Function to attach quiz event listeners
 function attachQuizListeners() {
-    document.querySelectorAll('.quiz-option').forEach(option => {
-        option.addEventListener('click', function() {
-            // Disable all options in current question
-            const currentOptions = this.parentElement.querySelectorAll('.quiz-option');
-            currentOptions.forEach(opt => {
-                opt.style.pointerEvents = 'none';
-            });
-
-            // Check if answer is correct
-            const isCorrect = this.dataset.answer === 'correct';
-            
-            if (isCorrect) {
-                this.classList.add('correct');
-                correctAnswers++;
-            } else {
-                this.classList.add('wrong');
-                // Show the correct answer
-                currentOptions.forEach(opt => {
-                    if (opt.dataset.answer === 'correct') {
-                        opt.classList.add('correct');
-                    }
-                });
+    document.querySelectorAll('.quiz-option').forEach((option, index) => {
+        option.setAttribute('tabindex', '0');
+        option.setAttribute('role', 'button');
+        option.setAttribute('aria-label', `Odpowiedź ${index + 1}: ${option.textContent}`);
+        
+        option.addEventListener('click', handleQuizAnswer);
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleQuizAnswer.call(option, e);
             }
-
-            // Move to next question after delay
-            setTimeout(() => {
-                currentQuestion++;
-                
-                if (currentQuestion < questionsToShow) {
-                    // Show next question
-                    const questions = document.querySelectorAll('.question');
-                    questions.forEach(q => q.classList.remove('active'));
-                    questions[currentQuestion].classList.add('active');
-                    
-                    // Update progress
-                    const progressFill = document.querySelector('.progress-fill');
-                    const currentQuestionSpan = document.getElementById('current-question');
-                    const progress = ((currentQuestion + 1) / questionsToShow) * 100;
-                    progressFill.style.width = progress + '%';
-                    currentQuestionSpan.textContent = currentQuestion + 1;
-                } else {
-                    // Show results
-                    showResults();
-                }
-            }, 1500);
         });
     });
+}
+
+function handleQuizAnswer(e) {
+    // Disable all options in current question
+    const currentOptions = this.parentElement.querySelectorAll('.quiz-option');
+    currentOptions.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        opt.setAttribute('aria-disabled', 'true');
+    });
+
+    // Check if answer is correct
+    const isCorrect = this.dataset.answer === 'correct';
+    
+    if (isCorrect) {
+        this.classList.add('correct');
+        this.setAttribute('aria-label', this.textContent + ' - Poprawna odpowiedź');
+        correctAnswers++;
+    } else {
+        this.classList.add('wrong');
+        this.setAttribute('aria-label', this.textContent + ' - Niepoprawna odpowiedź');
+        // Show the correct answer
+        currentOptions.forEach(opt => {
+            if (opt.dataset.answer === 'correct') {
+                opt.classList.add('correct');
+                opt.setAttribute('aria-label', opt.textContent + ' - To była poprawna odpowiedź');
+            }
+        });
+    }
+
+    // Move to next question after delay
+    setTimeout(() => {
+        currentQuestion++;
+        
+        if (currentQuestion < questionsToShow) {
+            // Show next question
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => q.classList.remove('active'));
+            questions[currentQuestion].classList.add('active');
+            
+            // Update progress
+            const progressFill = document.querySelector('.progress-fill');
+            const progressBar = document.querySelector('.progress-bar');
+            const currentQuestionSpan = document.getElementById('current-question');
+            const progress = ((currentQuestion + 1) / questionsToShow) * 100;
+            progressFill.style.width = progress + '%';
+            progressBar.setAttribute('aria-valuenow', progress);
+            currentQuestionSpan.textContent = currentQuestion + 1;
+        } else {
+            // Show results
+            showResults();
+        }
+    }, 1500);
 }
 
 // Initialize quiz on page load
@@ -346,6 +374,74 @@ document.querySelectorAll('.fact-card, .help-card').forEach(card => {
         this.style.animation = 'none';
     });
 });
+
+// Cost Calculator
+const calculateBtn = document.getElementById('calculate-btn');
+if (calculateBtn) {
+    calculateBtn.addEventListener('click', calculateCosts);
+    
+    // Also calculate on input change for better UX
+    document.getElementById('cigarettes-per-day')?.addEventListener('input', calculateCosts);
+    document.getElementById('pack-price')?.addEventListener('input', calculateCosts);
+}
+
+function calculateCosts() {
+    const cigarettesPerDay = parseFloat(document.getElementById('cigarettes-per-day')?.value) || 0;
+    const packPrice = parseFloat(document.getElementById('pack-price')?.value) || 0;
+    
+    // Calculate costs (20 cigarettes per pack)
+    const costPerCigarette = packPrice / 20;
+    const dailyCost = cigarettesPerDay * costPerCigarette;
+    
+    const weeklyCost = dailyCost * 7;
+    const monthlyCost = dailyCost * 30;
+    const yearlyCost = dailyCost * 365;
+    const fiveYearCost = yearlyCost * 5;
+    
+    // Update results
+    document.getElementById('result-week').textContent = weeklyCost.toFixed(2) + ' zł';
+    document.getElementById('result-month').textContent = monthlyCost.toFixed(2) + ' zł';
+    document.getElementById('result-year').textContent = yearlyCost.toFixed(2) + ' zł';
+    document.getElementById('result-5years').textContent = fiveYearCost.toFixed(2) + ' zł';
+    
+    // Show results
+    const resultsDiv = document.getElementById('calculator-results');
+    if (resultsDiv) {
+        resultsDiv.classList.add('show');
+    }
+}
+
+// Social Sharing Functions
+function shareOnFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+}
+
+function shareOnTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('NIE do uzależNIEń! - Poznaj prawdę o używkach i podejmij mądrą decyzję 💪');
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+}
+
+function shareOnWhatsApp() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('NIE do uzależNIEń! - Poznaj prawdę o używkach');
+    window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.querySelector('.share-btn.copy span:last-child');
+        const originalText = btn.textContent;
+        btn.textContent = 'Skopiowano!';
+        setTimeout(() => {
+            btn.textContent = originalText;
+        }, 2000);
+    }).catch(err => {
+        console.error('Błąd kopiowania:', err);
+        alert('Nie udało się skopiować linku');
+    });
+}
 
 // Console message
 console.log('%c NIE do uzależNIEń! ', 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
