@@ -289,26 +289,29 @@ function showResults() {
 }
 
 // Reset quiz
-document.querySelector('.reset-quiz').addEventListener('click', function() {
-    currentQuestion = 0;
-    correctAnswers = 0;
-    
-    // Select new random questions
-    selectRandomQuestions();
-    renderQuiz();
-    
-    // Reset progress
-    const progressFill = document.querySelector('.progress-fill');
-    const currentQuestionSpan = document.getElementById('current-question');
-    progressFill.style.width = (100 / questionsToShow) + '%';
-    currentQuestionSpan.textContent = '1';
-    
-    // Hide results, show quiz
-    const quizResult = document.getElementById('quiz-result');
-    quizResult.classList.remove('show');
-    document.getElementById('quiz-area').style.display = 'block';
-    document.querySelector('.quiz-progress').style.display = 'block';
-});
+const resetQuizButton = document.querySelector('.reset-quiz');
+if (resetQuizButton) {
+    resetQuizButton.addEventListener('click', function() {
+        currentQuestion = 0;
+        correctAnswers = 0;
+        
+        // Select new random questions
+        selectRandomQuestions();
+        renderQuiz();
+        
+        // Reset progress
+        const progressFill = document.querySelector('.progress-fill');
+        const currentQuestionSpan = document.getElementById('current-question');
+        progressFill.style.width = (100 / questionsToShow) + '%';
+        currentQuestionSpan.textContent = '1';
+        
+        // Hide results, show quiz
+        const quizResult = document.getElementById('quiz-result');
+        quizResult.classList.remove('show');
+        document.getElementById('quiz-area').style.display = 'block';
+        document.querySelector('.quiz-progress').style.display = 'block';
+    });
+}
 
 // Add parallax effect to hero section
 window.addEventListener('scroll', () => {
